@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shikshapeeth - Achieve Your Dream Results</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        html, body {
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-dark {
+            background: rgba(30, 58, 138, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #1e40af, #3b82f6, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Lift */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Page Loader -->
+    <div id="loader">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-brand-600"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between gap-4 h-16">
+                <!-- Logo -->
+                <div class="min-w-0 flex-shrink flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="font-display font-bold text-lg sm:text-2xl text-gray-900 tracking-tight truncate">Shikshapeeth</span>
+                </div>
+
+                <!-- Navigation Links (Hidden on small screens) -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-brand-600 font-medium transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-brand-600 font-medium transition-colors">About</a>
+                    <a href="#courses" class="text-gray-700 hover:text-brand-600 font-medium transition-colors">Courses</a>
+                    <a href="#contact" class="text-gray-700 hover:text-brand-600 font-medium transition-colors">Contact</a>
+                </div>
+
+                <!-- Header CTA -->
+                <div class="flex items-center">
+                    <a href="#enrollmentForm" class="sm:inline-flex enroll-scroll-trigger px-4 sm:px-6 py-2.5 bg-brand-600 text-white text-sm sm:text-base font-medium rounded-full hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-500/30 transform hover:-translate-y-0.5">
+                        Enroll Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-blue-50 via-white to-orange-50">
+        <!-- Background Blobs -->
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-sm font-semibold mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-600 mr-2"></span>
+                        <span id="admission-badge">Admissions Open for 2026-27</span>
+                    </div>
+                    <h1 class="font-display text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-6">
+                        Achieve Your <br>
+                        <span class="text-gradient">Dream Results</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Join Shikshapeeth, India's leading coaching institute for classes 5-10. We build strong foundations through expert mentorship and engaging learning methods.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="px-8 py-4 bg-brand-600 text-white font-bold rounded-full shadow-lg hover:bg-brand-700 hover:shadow-brand-500/40 transition-all transform hover:-translate-y-1 text-center">
+                            Enroll Now
+                        </a>
+                        <a href="#courses" class="px-8 py-4 bg-white text-brand-700 border-2 border-brand-100 font-bold rounded-full hover:border-brand-600 hover:text-brand-800 transition-all text-center flex items-center justify-center gap-2 group">
+                            Explore Courses 
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="mt-12 grid grid-cols-3 gap-6 border-t border-gray-200 pt-8">
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">15k+</p>
+                            <p class="text-sm text-gray-500">Students</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">98%</p>
+                            <p class="text-sm text-gray-500">Success Rate</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">50+</p>
+                            <p class="text-sm text-gray-500">Expert Faculty</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative lg:h-[600px] flex items-center justify-center" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="relative w-full max-w-lg">
+                        <!-- Decorative elements behind image -->
+                        <div class="absolute top-0 -left-4 w-72 h-72 bg-brand-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                        <div class="absolute top-0 -right-4 w-72 h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                        
+                        <!-- Main Image -->
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Students studying" 
+                             class="relative rounded-2xl shadow-2xl z-10 w-full object-cover h-[500px] animate-float border-4 border-white">
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl z-20 flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                            <div class="bg-green-100 p-3 rounded-full text-green-600">
+                                <i class="fa-solid fa-check text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Trusted by</p>
+                                <p class="font-bold text-gray-900">10,000+ Parents</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative" data-aos="fade-up-right">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg w-full h-64 object-cover transform translate-y-8">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+                    </div>
+                    <!-- Experience Badge -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-600 text-white p-6 rounded-full shadow-2xl border-4 border-white text-center w-40 h-40 flex flex-col justify-center items-center z-10">
+                        <span class="text-4xl font-bold">10+</span>
+                        <span class="text-xs uppercase tracking-wider">Years Exp.</span>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up-left">
+                    <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">About Us</h2>
+                    <h3 class="font-display text-4xl font-bold text-gray-900 mb-6">Building Strong Foundations for Classes 5-10</h3>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        At Shikshapeeth, we specialize in nurturing young minds from Class 5 to Class 10. Our mission is to make learning enjoyable and effective, ensuring every child develops a strong academic foundation.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        We focus on conceptual clarity, regular assessments, and personalized attention to help students excel in their school exams and build confidence for future competitive exams.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Our Mission</h4>
+                                <p class="text-gray-600 text-sm">To provide quality foundational education for middle school students.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-accent-100 flex items-center justify-center text-accent-600">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Our Vision</h4>
+                                <p class="text-gray-600 text-sm">To be the most trusted coaching institute for classes 5-10 in India.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Our Programs</h2>
+                <h3 class="font-display text-4xl font-bold text-gray-900 mb-4">Courses for Classes 5-10</h3>
+                <p class="text-gray-600">Comprehensive coaching programs designed specifically for middle school students to excel in academics.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Course Card 1: Mathematics -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift border border-gray-100 group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900 mb-2">Mathematics Mastery</h4>
+                    <p class="text-gray-600 text-sm mb-4">Strong foundation in Algebra, Geometry, Arithmetic & Mental Math for Classes 5-10.</p>
+                    <div class="flex items-center gap-2 text-xs text-brand-600 font-semibold mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Classes 5-10</span>
+                    </div>
+                    <a href="#contact" class="text-brand-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Learn More <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Course Card 2: Science -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift border border-gray-100 group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center text-green-600 text-2xl mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900 mb-2">Science Explorer</h4>
+                    <p class="text-gray-600 text-sm mb-4">Physics, Chemistry, Biology with practical experiments and interactive learning.</p>
+                    <div class="flex items-center gap-2 text-xs text-brand-600 font-semibold mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Classes 5-10</span>
+                    </div>
+                    <a href="#contact" class="text-brand-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Learn More <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Course Card 3: English -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift border border-gray-100 group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900 mb-2">English Excellence</h4>
+                    <p class="text-gray-600 text-sm mb-4">Grammar, Vocabulary, Writing Skills, Literature & Spoken English development.</p>
+                    <div class="flex items-center gap-2 text-xs text-brand-600 font-semibold mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Classes 5-10</span>
+                    </div>
+                    <a href="#contact" class="text-brand-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Learn More <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Course Card 4: SST/Computer -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift border border-gray-100 group cursor-pointer" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900 mb-2">SST & Computers</h4>
+                    <p class="text-gray-600 text-sm mb-4">Social Studies, History, Geography & Basic Computer Skills with coding fundamentals.</p>
+                    <div class="flex items-center gap-2 text-xs text-brand-600 font-semibold mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Classes 5-10</span>
+                    </div>
+                    <a href="#contact" class="text-brand-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Learn More <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Info Banner -->
+            <div class="mt-12 bg-brand-600 rounded-2xl p-8 text-white text-center" data-aos="fade-up">
+                <h4 class="font-display text-2xl font-bold mb-2">Complete Academic Support</h4>
+                <p class="text-brand-100 mb-4">We cover all subjects for CBSE, ICSE, and State Board students in Classes 5-10</p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <span class="bg-white/20 px-4 py-2 rounded-full">✓ All Subjects Covered</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">✓ Weekly Tests</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">✓ Doubt Clearing Sessions</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full">✓ Parent-Teacher Meetings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section id="faculty" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Our Team</h2>
+                <h3 class="font-display text-4xl font-bold text-gray-900 mb-4">Meet Our Expert Faculty</h3>
+                <p class="text-gray-600">Learn from the best. Our teachers are specialized in middle school education and child psychology.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Faculty 1 -->
+                <div class="group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden rounded-2xl mb-6">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Teacher" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="flex gap-4 text-white">
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900">Mr. Rajesh Kumar</h4>
+                    <p class="text-brand-600 font-medium mb-2">Mathematics Expert</p>
+                    <p class="text-gray-500 text-sm">B.Tech with 12+ years of experience in teaching Math to middle school students.</p>
+                </div>
+
+                <!-- Faculty 2 -->
+                <div class="group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative overflow-hidden rounded-2xl mb-6">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Teacher" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="flex gap-4 text-white">
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-twitter text-xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900">Mrs. Priya Sharma</h4>
+                    <p class="text-brand-600 font-medium mb-2">Science Specialist</p>
+                    <p class="text-gray-500 text-sm">M.Sc. in Physics with expertise in making science fun and practical for young minds.</p>
+                </div>
+
+                <!-- Faculty 3 -->
+                <div class="group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative overflow-hidden rounded-2xl mb-6">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Teacher" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="flex gap-4 text-white">
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                                <a href="#" class="hover:text-brand-400"><i class="fa-brands fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="font-display text-xl font-bold text-gray-900">Mr. Amit Verma</h4>
+                    <p class="text-brand-600 font-medium mb-2">English & Computers</p>
+                    <p class="text-gray-500 text-sm">MA in English Literature with TEFL certification and basic coding expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-brand-900 text-white relative overflow-hidden">
+        <!-- Decorative circles -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-500 opacity-10 rounded-full translate-x-1/3 translate-y-1/3"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-300 font-bold tracking-wide uppercase text-sm mb-2">Testimonials</h2>
+                <h3 class="font-display text-4xl font-bold mb-4">What Parents & Students Say</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-dark p-8 rounded-2xl relative" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-500 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 mb-6 italic">"My son joined in Class 7 and his math scores improved from 60% to 95%! The teachers are patient and explain concepts so clearly. Best decision we made!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-12 h-12 rounded-full border-2 border-brand-500">
+                        <div>
+                            <h5 class="font-bold">Mrs. Sunita Mehta</h5>
+                            <p class="text-xs text-brand-300">Parent of Class 9 Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-dark p-8 rounded-2xl relative" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-500 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 mb-6 italic">"I used to hate science, but the practical experiments at Shikshapeeth made it my favorite subject! Now I want to become a scientist when I grow up."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" class="w-12 h-12 rounded-full border-2 border-brand-500">
+                        <div>
+                            <h5 class="font-bold">Arjun Gupta</h5>
+                            <p class="text-xs text-brand-300">Class 8 Student</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-dark p-8 rounded-2xl relative" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-500 mb-4 opacity-50"></i>
+                    <p class="text-gray-300 mb-6 italic">"The foundation course for Class 10 board exams is excellent. My daughter gained so much confidence. Scored 98% in her pre-boards!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-12 h-12 rounded-full border-2 border-brand-500">
+                        <div>
+                            <h5 class="font-bold">Mr. Rakesh Singh</h5>
+                            <p class="text-xs text-brand-300">Parent of Class 10 Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <h2 class="text-brand-600 font-bold tracking-wide uppercase text-sm mb-2">Contact Us</h2>
+                    <h3 class="font-display text-4xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+                    <p class="text-gray-600 mb-8 text-lg">Have questions about admissions for <span id="contact-year">2026-27</span>? Fill out the form and our team will get back to you within 24 hours.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Visit Us</h4>
+                                <p class="text-gray-600">123 Education Lane, Knowledge City, New Delhi, 110001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Call Us</h4>
+                                <p class="text-gray-600">+91 98765 43210</p>
+                                <p class="text-gray-600">+91 11 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-brand-600 flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email Us</h4>
+                                <p class="text-gray-600">admissions@shikshapeeth.com</p>
+                                <p class="text-gray-600">info@shikshapeeth.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 rounded-3xl overflow-hidden border border-gray-200 shadow-lg">
+                        <div class="bg-brand-600 px-6 py-4">
+                            <h4 class="text-white font-bold">Find Us on the Map</h4>
+                            <p class="text-sm text-brand-100 mt-1">123 Education Lane, Knowledge City, New Delhi</p>
+                        </div>
+                        <div class="aspect-video w-full">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14096.489004898579!2d77.2039067!3d28.6139391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04d97d453d8d%3A0xb9c881efa0a4b424!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000"
+                                class="w-full h-full"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen=""
+                                title="Shikshapeeth Location">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl" data-aos="fade-left">
+                    <form id="enrollmentForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Parent's Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all" placeholder="Enter name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Student's Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all" placeholder="Enter name">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all" placeholder="parent@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all" placeholder="+91 98765 43210">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Current Class</label>
+                                <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white">
+                                    <option value="" disabled selected>Select class</option>
+                                    <option value="5">Class 5</option>
+                                    <option value="6">Class 6</option>
+                                    <option value="7">Class 7</option>
+                                    <option value="8">Class 8</option>
+                                    <option value="9">Class 9</option>
+                                    <option value="10">Class 10</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Admission Year</label>
+                                <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all bg-white" id="admission-year-select">
+                                    <option value="" disabled selected>Select year</option>
+                                    <option value="2026-27" id="option-2026-27">2026-27</option>
+                                    <option value="2027-28" id="option-2027-28">2027-28</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Interested Subjects</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="w-4 h-4 text-brand-600 rounded focus:ring-brand-500">
+                                    <span class="text-sm text-gray-700">Mathematics</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="w-4 h-4 text-brand-600 rounded focus:ring-brand-500">
+                                    <span class="text-sm text-gray-700">Science</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="w-4 h-4 text-brand-600 rounded focus:ring-brand-500">
+                                    <span class="text-sm text-gray-700">English</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="w-4 h-4 text-brand-600 rounded focus:ring-brand-500">
+                                    <span class="text-sm text-gray-700">All Subjects</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all" placeholder="Tell us about your child's learning goals..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-brand-600 text-white font-bold py-4 rounded-lg hover:bg-brand-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-brand-500/30">
+                            Submit Enquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-brand-600 rounded flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl">Shikshapeeth</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Empowering students from Class 5-10 to achieve academic excellence through quality education and dedicated mentorship.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-brand-400 transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-400 transition-colors">About Us</a></li>
+                        <li><a href="#courses" class="hover:text-brand-400 transition-colors">Courses</a></li>
+                        <li><a href="#faculty" class="hover:text-brand-400 transition-colors">Faculty</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Courses Offered</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Mathematics (5-10)</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Science (5-10)</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">English (5-10)</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">All Subjects Package</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Get updates on new batches and results.</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-1 focus:ring-brand-500 w-full text-sm">
+                        <button class="bg-brand-600 px-4 py-2 rounded-lg hover:bg-brand-700 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; <span id="footer-year">2026</span> Shikshapeeth. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS Animation Library
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+        });
+
+        // Dynamic Year Update Logic
+        function updateAdmissionYear() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth(); // 0-11 (Jan is 0)
+            
+            // Academic year logic: If month is April (3) or later, show next academic year
+            // Academic year typically starts in April in India
+            let startYear, endYear;
+            
+            if (currentMonth >= 3) { // April onwards
+                startYear = currentYear;
+                endYear = currentYear + 1;
+            } else { // Jan-March
+                startYear = currentYear - 1;
+                endYear = currentYear;
+            }
+            
+            const academicYear = `${startYear}-${endYear.toString().slice(-2)}`;
+            const nextAcademicYear = `${startYear + 1}-${(endYear + 1).toString().slice(-2)}`;
+            
+            // Update badge
+            document.getElementById('admission-badge').textContent = `Admissions Open for ${academicYear}`;
+            
+            // Update contact section
+            document.getElementById('contact-year').textContent = academicYear;
+            
+            // Update admission year select options
+            document.getElementById('option-2026-27').value = academicYear;
+            document.getElementById('option-2026-27').textContent = academicYear;
+            document.getElementById('option-2027-28').value = nextAcademicYear;
+            document.getElementById('option-2027-28').textContent = nextAcademicYear;
+            
+            // Update footer year
+            document.getElementById('footer-year').textContent = currentYear;
+        }
+
+        // Run on load
+        updateAdmissionYear();
+
+        // Remove Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-md');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-md', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
+            }
+        });
+
+        // Header CTA scrolls directly to the form with navbar offset
+        document.querySelectorAll('.enroll-scroll-trigger').forEach(trigger => {
+            trigger.addEventListener('click', event => {
+                event.preventDefault();
+                const form = document.getElementById('enrollmentForm');
+                const navHeight = navbar.offsetHeight;
+                const top = form.getBoundingClientRect().top + window.scrollY - navHeight - 24;
+
+                window.scrollTo({
+                    top,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Handling
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get button
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            // Loading state
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+            
+            // Simulate API call
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Enquiry Submitted!';
+                btn.classList.remove('bg-brand-600', 'hover:bg-brand-700');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75', 'bg-green-600', 'hover:bg-green-700');
+                    btn.classList.add('bg-brand-600', 'hover:bg-brand-700');
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
